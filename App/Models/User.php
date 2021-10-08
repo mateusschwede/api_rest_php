@@ -1,54 +1,48 @@
 <?php
     namespace App\Models;
 
-    class User
-    {
+    class User {
         private static $table = 'user';
 
         public static function select(int $id) {
-            $connPdo = new \PDO(DBDRIVE.': host='.DBHOST.'; dbname='.DBNAME, DBUSER, DBPASS);
-
-            $sql = 'SELECT * FROM '.self::$table.' WHERE id = :id';
-            $stmt = $connPdo->prepare($sql);
-            $stmt->bindValue(':id', $id);
-            $stmt->execute();
-
-            if ($stmt->rowCount() > 0) {
-                return $stmt->fetch(\PDO::FETCH_ASSOC);
+            $db = new \PDO(DBDRIVE.': host='.DBHOST.'; dbname='.DBNAME, DBUSER, DBPASS);
+            $r = $db->prepare("SELECT * FROM user WHERE id=?");
+            $r->execute(array($id));
+            
+            if ($r->rowCount()>0) {
+                return $r->fetchAll(\PDO::FETCH_ASSOC);
             } else {
                 throw new \Exception("Nenhum usuário encontrado!");
             }
         }
 
         public static function selectAll() {
-            $connPdo = new \PDO(DBDRIVE.': host='.DBHOST.'; dbname='.DBNAME, DBUSER, DBPASS);
+            $db = new \PDO(DBDRIVE.': host='.DBHOST.'; dbname='.DBNAME, DBUSER, DBPASS);
+            $r = $db->query("SELECT * FROM user");
 
-            $sql = 'SELECT * FROM '.self::$table;
-            $stmt = $connPdo->prepare($sql);
-            $stmt->execute();
-
-            if ($stmt->rowCount() > 0) {
-                return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            if ($r->rowCount()>0) {
+                return $r->fetchAll(\PDO::FETCH_ASSOC);
             } else {
                 throw new \Exception("Nenhum usuário encontrado!");
             }
         }
 
-        public static function insert($data)
-        {
-            $connPdo = new \PDO(DBDRIVE.': host='.DBHOST.'; dbname='.DBNAME, DBUSER, DBPASS);
+        public static function insert($data) {
+            $db = new \PDO(DBDRIVE.': host='.DBHOST.'; dbname='.DBNAME, DBUSER, DBPASS);
+            /*$sql = 'INSERT INTO '.self::$table.' (email, password, name) VALUES (:em, :pa, :na)';
+            $r2 = $db->prepare($sql);
+            $r2->bindValue(':em', $data['email']);
+            $r2->bindValue(':pa', $data['password']);
+            $r2->bindValue(':na', $data['name']);
+            $r2->execute();*/
 
-            $sql = 'INSERT INTO '.self::$table.' (email, password, name) VALUES (:em, :pa, :na)';
-            $stmt = $connPdo->prepare($sql);
-            $stmt->bindValue(':em', $data['email']);
-            $stmt->bindValue(':pa', $data['password']);
-            $stmt->bindValue(':na', $data['name']);
-            $stmt->execute();
+            $r = $db->prepare("INSERT INTO user (email,password,name) VALUES (?,?,?)");
+            $r->execute(array($data['email'],$data['password'],$data['name']));
 
-            if ($stmt->rowCount() > 0) {
-                return 'Usuário(a) inserido com sucesso!';
+            if ($r2->rowCount()>0) {
+                return "Usuário inserido!";
             } else {
-                throw new \Exception("Falha ao inserir usuário(a)!");
+                throw new \Exception("Falha ao inserir usuário!");
             }
         }
     }

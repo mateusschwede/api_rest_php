@@ -1,12 +1,11 @@
 <?php
     namespace App\Services;
-
     use App\Models\User;
 
-    class UserService
-    {
-        public function get($id = null) 
-        {
+    class UserService {
+
+        //Ver dados de usuário
+        public function get($id = null) {
             if ($id) {
                 return User::select($id);
             } else {
@@ -14,20 +13,14 @@
             }
         }
 
-        public function post() 
-        {
-            $data = $_POST;
-
-            return User::insert($data);
+        //Inserir dados de usuário
+        public function post() {
+            return User::insert($_POST);
         }
 
-        public function update() 
-        {
-            
-        }
+        //Editar dados de usuário
+        public function update() {}
 
-        public function delete() 
-        {
-            
-        }
+        //Excluir dados de usuário
+        public function delete() {}
     }

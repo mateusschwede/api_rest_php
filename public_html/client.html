@@ -2,13 +2,13 @@
 <html>
 <head>
     <meta charset='utf-8'>
-    <title>Page Title</title>
+    <title>Cliente</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 <body>
-    
     <script type="text/javascript">
-        var url = 'http://localhost/PROJS/VIDEO_AULAS/SERIE/03_APIREST2021/public_html/api/user';
+        var url = 'http://localhost/projetos/api_rest_php/public_html/api/user'; //Edite conforme diretório do projeto
+        //console.log(fetch(url)); //Retornará, no console, promise, que pode possuir status Resolv ou Reject, dependendo da url informada
 
         fetch(url)
             .then(response => response.json())
@@ -16,7 +16,7 @@
                 console.log(data);
             })
             .catch(error => {
-                console.log('ERROR: ' + error.message);
+                console.log('ERRO: '+error.message);
             })
     </script>
 </body>

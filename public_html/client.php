@@ -1,14 +1,10 @@
 <?php
-
-    $url = 'http://localhost/PROJS/VIDEO_AULAS/SERIE/03_APIREST2021/public_html/api';
-
+    $url = 'http://localhost/projetos/api_rest_php/public_html/api'; //Edite conforme diretório do projeto
     $class = '/user';
-    $param = '';
-
+    $param = ''; //Pode ser o parâmetro específico, como 1 no final da URL (/1) para dados do user id 1
     $response = file_get_contents($url.$class.$param);
 
-    //echo $response;
-
-    //
-    //$response = json_decode($response, 1);
-    //var_dump($response['data'][1]['email']);
+    $response = json_decode($response,1); //Opção 1 transforma em array, sem opção mantém como objeto
+    //var_dump($response); //Mostra array JSON com todos dados
+    var_dump($response['data'][1]['email']); //Mostra email do usuário index 1
+?>
