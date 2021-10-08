@@ -8,3 +8,11 @@
     //var_dump($response); //Mostra array JSON com todos dados
     var_dump($response['data'][1]['email']); //Mostra email do usuário index 1
 ?>
+
+<h3>Adicionar Usuário:</h3>
+<form action="<?=$url.$class?>" method="post">
+    <input type="text" required name="name" placeholder="Nome">
+    <input type="email" required name="email" placeholder="email@email.com">
+    <input type="text" required name="password" placeholder="Senha">
+    <input type="submit" value="Adicionar">
+</form>

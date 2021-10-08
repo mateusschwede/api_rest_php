@@ -25,4 +25,3 @@ INSERT INTO user(email,password,name) VALUES ("ubsocial@gmail","123","ubsocial")
 4. Informando, no browser, 'urlProjeto/api/user' listará JSON de todos usuários
 5. Informando, no browser, 'urlProjeto/api/user/1' mostrará dados do usuário 1
 6. urlProjeto/client.php é alusivo a outra aplicação, que consome a API
-7. urlProjeto/client.html consome a API, usando js utilizando fetch
